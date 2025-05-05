@@ -19,9 +19,6 @@ namespace LoginHrSystems.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserRole>().HasKey(x => new { x.UserId, x.RoleId });
-            modelBuilder.Entity<RolePermission>().HasKey(x => new { x.RoleId, x.PermissionId });
-            modelBuilder.Entity<UserPermission>().HasKey(x => new { x.UserId, x.PermissionId });
         }
 
     }
