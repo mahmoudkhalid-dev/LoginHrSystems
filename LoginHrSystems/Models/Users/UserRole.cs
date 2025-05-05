@@ -5,6 +5,7 @@ namespace LoginHrSystems.Models.Users
 {
     public class UserRole
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
