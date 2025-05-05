@@ -1,10 +1,7 @@
-﻿using System.ComponentModel;
-
-namespace LoginHrSystems.Models.Employees
+﻿namespace LoginHrSystems.DTOs.Employees
 {
-    public class Employee
+    public class AddingEmployeeDto
     {
-        public int Id { get; set; }
         public int Code { get; set; }
         public string Name { get; set; } = null!;
         public string Phone { get; set; } = null!;
@@ -17,12 +14,5 @@ namespace LoginHrSystems.Models.Employees
         public string SalaryCurrency { get; set; } = null!;
         public double Bonus { get; set; }
         public string BonusCurrency { get; set; } = null!;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        [DefaultValue(true)]
-        public bool IsActive { get; set; }
-
-        [DefaultValue(false)]
-        public bool IsDeleted { get; set; }
     }
 }
