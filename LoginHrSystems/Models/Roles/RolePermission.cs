@@ -6,6 +6,8 @@ namespace LoginHrSystems.Models.Roles
     {
         public int Id { get; set; }
         public int RoleId { get; set; }
+
+        [ForeignKey(nameof(RoleId))]
         public Role Role { get; set; } = null!;
 
         public int PermissionId { get; set; }
