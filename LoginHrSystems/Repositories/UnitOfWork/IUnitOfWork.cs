@@ -1,4 +1,6 @@
-﻿namespace LoginHrSystems.Repositories.Contract
+﻿using LoginHrSystems.Repositories.Contract;
+
+namespace LoginHrSystems.Repositories.UnitOfWork
 {
     public interface IUnitOfWork
     {

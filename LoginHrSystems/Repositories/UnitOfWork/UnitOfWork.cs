@@ -2,9 +2,9 @@
 using LoginHrSystems.Repositories.Contract;
 using System;
 
-namespace LoginHrSystems.Repositories.Implementation
+namespace LoginHrSystems.Repositories.UnitOfWork
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
 
         private readonly ApplicationDbContext _context;

@@ -1,4 +1,10 @@
 using LoginHrSystems.Data;
+using LoginHrSystems.Helpers;
+using LoginHrSystems.Repositories.Contract;
+using LoginHrSystems.Repositories.Implementation;
+using LoginHrSystems.Repositories.UnitOfWork;
+using LoginHrSystems.Services.Contract;
+using LoginHrSystems.Services.Implementation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -65,6 +71,20 @@ namespace LoginHrSystems
                         context.User.HasClaim(c => c.Type == "permission" && c.Value == "GetEmployeeDetails")));
 
             });
+
+
+            builder.Services.AddTransient<JwtHelper>();
+
+            builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+            builder.Services.AddTransient<IRoleService, RoleService>();
+            builder.Services.AddTransient<IUserService, UserService>();
+
+            builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddTransient<IPermissionRepository, PermissionRepository>();
+            builder.Services.AddTransient<IRoleRepository, RoleRepository>();
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+
+            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
