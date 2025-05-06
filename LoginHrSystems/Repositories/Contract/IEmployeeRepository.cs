@@ -6,7 +6,7 @@ namespace LoginHrSystems.Repositories.Contract
     {
         Task AddAsync(Employee employee);
         Task<Employee?> GetByIdAsync(int id);
-        Task<List<Employee>> GetAllAsync();
-        void Remove(Employee employee);
+        Task<IEnumerable<Employee>> GetAllAsync();
+        public void Delete(Employee employee);
     }
 }

@@ -5,8 +5,9 @@ namespace LoginHrSystems.Repositories.Contract
     public interface IRoleRepository
     {
         Task<Role?> GetByIdAsync(int id);
-        Task<List<Role>> GetAllAsync();
+        Task<IEnumerable<Role>> GetAllAsync();
+        void Delete(Role role);
         Task AddAsync(Role role);
-        void Remove(Role role);
+        Task RemovePermissionsAsync(int roleId);
     }
 }
