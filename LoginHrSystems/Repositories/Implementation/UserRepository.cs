@@ -42,7 +42,9 @@ namespace LoginHrSystems.Repositories.Implementation
         {
             return await _context.Users
                 .Include(u => u.UserRoles)
+                .ThenInclude(u => u.Role)
                 .Include(u => u.UserPermissions)
+                .ThenInclude(u => u.Permission)
                 .FirstOrDefaultAsync(u => u.UserName == username);
         }
 
@@ -72,7 +74,7 @@ namespace LoginHrSystems.Repositories.Implementation
             await _context.UserRoles.AddAsync(entity);
         }
 
-        public async Task RemoveRolesAsync(int userId)
+        public void RemoveRolesAsync(int userId)
         {
             var roles = _context.UserRoles.Where(ur => ur.UserId == userId);
             _context.UserRoles.RemoveRange(roles);
@@ -89,7 +91,7 @@ namespace LoginHrSystems.Repositories.Implementation
             await _context.UserPermissions.AddRangeAsync(permissions);
         }
 
-        public async Task RemovePermissionsAsync(int userId)
+        public void RemovePermissionsAsync(int userId)
         {
             var userPerms = _context.UserPermissions.Where(up => up.UserId == userId);
             _context.UserPermissions.RemoveRange(userPerms);

@@ -28,7 +28,7 @@ namespace LoginHrSystems.Services.Implementation
 
             var permissions = user.UserPermissions.Select(p => p.Permission.Name.ToString());
 
-            return _jwt.GenerateToken(user, permissions);
+            return _jwt.GenerateToken(user, permissions ?? []);
         }
 
         public async Task CreateUserAsync(CreateUserDto dto)
@@ -37,6 +37,7 @@ namespace LoginHrSystems.Services.Implementation
             {
                 UserName = dto.Username,
                 HashedPassword = dto.Password,
+                Email = dto.Email,
                 UserRoles = new List<UserRole>()
             };
 
@@ -52,6 +53,16 @@ namespace LoginHrSystems.Services.Implementation
                             RoleId = roleId,
                         }
                     );
+
+                    foreach (var permission in role.RolePermissions)
+                    {
+                        user.UserPermissions.Add(
+                        new UserPermission
+                        {
+                            PermissionId = permission.PermissionId
+                        }
+                    );
+                    }
                 }
 
             }

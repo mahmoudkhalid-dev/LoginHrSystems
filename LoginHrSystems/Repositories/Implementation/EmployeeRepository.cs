@@ -15,14 +15,40 @@ namespace LoginHrSystems.Repositories.Implementation
             _context = context;
         }
 
-        public async Task<IEnumerable<Employee>> GetAllAsync()
+        public async Task<IEnumerable<Employee>> GetAllAsync(
+            bool applyNameFilter,
+            string? name,
+            bool applyJobTitleFilter,
+            string? jobTitle,
+            bool applySalaryRange,
+            double salaryFrom,
+            double salaryTo
+        )
         {
-            return await _context.Employees.ToListAsync();
+
+            var employees = _context.Employees.Where(e => e.IsActive && !e.IsDeleted);
+
+            if (applyNameFilter)
+            {
+                employees = employees.Where(e => e.Name.Contains(name));
+            }
+
+            if (applyJobTitleFilter)
+            {
+                employees = employees.Where(e => e.JobTitle.Contains(jobTitle));
+            }
+
+            if (applySalaryRange)
+            {
+                employees = employees.Where(e => e.Salary >= salaryFrom && e.Salary <= salaryTo);
+            }
+
+            return await employees.ToListAsync();
         }
 
         public async Task<Employee?> GetByIdAsync(int id)
         {
-            return await _context.Employees.FindAsync(id);
+            return await _context.Employees.Where(e => !e.IsActive).FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task AddAsync(Employee employee)
