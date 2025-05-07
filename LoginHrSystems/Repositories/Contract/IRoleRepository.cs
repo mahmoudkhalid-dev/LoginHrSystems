@@ -8,6 +8,6 @@ namespace LoginHrSystems.Repositories.Contract
         Task<IEnumerable<Role>> GetAllAsync();
         void Delete(Role role);
         Task AddAsync(Role role);
-        Task RemovePermissionsAsync(int roleId);
+        void RemovePermissionsAsync(int roleId);
     }
 }

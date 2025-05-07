@@ -11,6 +11,6 @@
         public string Address { get; set; } = null!;
         public string Department { get; set; } = null!;
         public int YearsOfExperience { get; set; }
-        public SalaryDetailsDto SalaryDetails { get; set; } = null!;
+        public SalaryDetailsDto? SalaryDetails { get; set; }
     }
 }

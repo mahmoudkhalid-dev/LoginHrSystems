@@ -32,9 +32,15 @@ namespace LoginHrSystems.Repositories.Implementation
 
         public async Task<Role?> GetByIdAsync(int id)
         {
-            return await _context.Roles.Include(r => r.RolePermissions)
-                                       .ThenInclude(rp => rp.Permission)
-                                       .FirstOrDefaultAsync(r => r.Id == id);
+            try
+            {
+                return await _context.Roles.FirstOrDefaultAsync(r => r.Id == id);
+            }
+            catch (Exception e)
+            {
+
+            }
+            return await _context.Roles.FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public void Update(Role role)
@@ -58,7 +64,7 @@ namespace LoginHrSystems.Repositories.Implementation
             await _context.RolePermissions.AddRangeAsync(entities);
         }
 
-        public async Task RemovePermissionsAsync(int roleId)
+        public void RemovePermissionsAsync(int roleId)
         {
             var perms = _context.RolePermissions.Where(rp => rp.RoleId == roleId);
             _context.RolePermissions.RemoveRange(perms);
